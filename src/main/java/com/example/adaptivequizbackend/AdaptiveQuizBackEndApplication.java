@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class AdaptiveQuizBackEndApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AdaptiveQuizBackEndApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AdaptiveQuizBackEndApplication.class, args);
+    }
 
 }
