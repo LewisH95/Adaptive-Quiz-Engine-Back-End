@@ -22,13 +22,6 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-    <developers>
-        <developer>
-            <id>developer1</id>
-            <name>Developer Name</name>
-            <email>developer@example.com</email>
-        </developer>
-    </developers>
     <scm>
         <connection>scm:git:git://example.com/my-project.git</connection>
         <developerConnection>scm:git:ssh://example.com/my-project.git</developerConnection>
