@@ -27,9 +27,13 @@ public class QuestionService {
 
 
     private Question getRandomQuestion(List<Question> questions) {
+        if (questions.isEmpty()) {
+            throw new NoSuchElementException("No questions available");
+        }
         int index = (int) (Math.random() * questions.size());
         return questions.get(index);
     }
+
 
     public Question getQuestionById(String id) {
         Optional<Question> question = questionRepository.findById(id);

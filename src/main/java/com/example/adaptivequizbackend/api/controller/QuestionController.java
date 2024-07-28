@@ -50,35 +50,6 @@ public class QuestionController {
         return questionService.getFeedback(questionId, userAnswer);
     }
 
-    @GetMapping("/feedback/multiple")
-    public Map<String, String> getMultipleFeedback(
-            @RequestParam List<String> questionIds,
-            @RequestParam List<String> userAnswers) {
-
-        if (questionIds.size() != userAnswers.size()) {
-            throw new IllegalArgumentException("Mismatch between question IDs and user answers.");
-        }
-
-        Map<String, String> feedbackMap = new HashMap<>();
-        for (int i = 0; i < questionIds.size(); i++) {
-            String questionId = questionIds.get(i);
-            String userAnswer = userAnswers.get(i);
-
-            Question question = questionService.getQuestionById(questionId);
-            if (question.isCorrect(userAnswer)) {
-               getFeedback(questionId, userAnswer);
-                if (!question.isCorrect(userAnswer)) {
-                    feedbackMap.put(questionId, question.getFeedback());
-                } else {
-                    feedbackMap.put(questionId, "Correct answer.");
-                }
-            } else {
-                feedbackMap.put(questionId, "Question not found.");
-            }
-        }
-        return feedbackMap;
-    }
-
     @GetMapping("/progress")
     public Map<String, Integer> getStudentProgress(@RequestParam String userId) {
         return questionService.getStudentProgress(userId);

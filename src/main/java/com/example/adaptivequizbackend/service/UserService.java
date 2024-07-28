@@ -39,27 +39,33 @@ public class UserService {
 
 
     public void updateProgress(String username, String difficulty, boolean correct) {
-        Optional<User> userOptional = userRepository.findUserByUsername(username);
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            switch (difficulty.toLowerCase()) {
-                case "easy":
-                    user.setEasyScore(user.getEasyScore() + (correct ? 1 : 0));
-                    break;
-                case "medium":
-                    user.setMediumScore(user.getMediumScore() + (correct ? 1 : 0));
-                    break;
-                case "hard":
-                    user.setHardScore(user.getHardScore() + (correct ? 1 : 0));
-                    break;
-                default:
-                    throw new IllegalArgumentException("Invalid difficulty level");
+        try {
+            Optional<User> userOptional = userRepository.findUserByUsername(username);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                switch (difficulty.toLowerCase()) {
+                    case "easy":
+                        user.setEasyScore(user.getEasyScore() + (correct ? 1 : 0));
+                        break;
+                    case "medium":
+                        user.setMediumScore(user.getMediumScore() + (correct ? 1 : 0));
+                        break;
+                    case "hard":
+                        user.setHardScore(user.getHardScore() + (correct ? 1 : 0));
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Invalid difficulty level");
+                }
+                userRepository.save(user);
+            } else {
+                throw new IllegalArgumentException("User not found with username: " + username);
             }
-            userRepository.save(user);
-        } else {
-            throw new IllegalArgumentException("User not found with username: " + username);
+        } catch (Exception e) {
+            System.err.println("Error updating user progress: " + e.getMessage());
+            throw e;
         }
     }
+
     
     public Map<String, Integer> getScores(String userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
