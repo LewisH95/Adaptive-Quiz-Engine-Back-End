@@ -41,4 +41,10 @@ public class BayesAlgorithm {
 
         return currentDifficulty;
     }
+
+    public void resetStreak() {
+        correctInARow = 0;
+        incorrectInARow = 0;
+        currentDifficulty = "easy";
+    }
 }

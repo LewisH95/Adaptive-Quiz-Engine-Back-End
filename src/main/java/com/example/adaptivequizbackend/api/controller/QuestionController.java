@@ -4,6 +4,7 @@ import com.example.adaptivequizbackend.api.model.Question;
 import com.example.adaptivequizbackend.service.BayesAlgorithm;
 import com.example.adaptivequizbackend.service.QuestionService;
 import com.example.adaptivequizbackend.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -53,5 +54,11 @@ public class QuestionController {
     @GetMapping("/progress")
     public Map<String, Integer> getStudentProgress(@RequestParam String userId) {
         return questionService.getStudentProgress(userId);
+    }
+
+    @PostMapping("/resetStreaks")
+    public ResponseEntity<Void> resetStreaks() {
+        bayesAlgorithm.resetStreak();
+        return ResponseEntity.ok().build();
     }
 }
