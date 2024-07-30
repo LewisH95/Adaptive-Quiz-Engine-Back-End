@@ -22,6 +22,10 @@ public class Question {
 
     private String feedback;
 
+    public Question() {
+
+    }
+
     public Question(String questionId, String difficulty, String questionText, String questionType, List<String> choices, String correctAnswer, String feedback) {
         this.questionId = questionId;
         this.difficulty = difficulty;

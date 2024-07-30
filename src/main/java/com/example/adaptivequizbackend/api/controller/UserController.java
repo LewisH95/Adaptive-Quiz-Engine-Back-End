@@ -20,16 +20,14 @@ public class UserController {
 
     @Autowired
     public UserController(UserService userService) {
-
         this.userService = userService;
     }
 
     @PostMapping("/createUser")
     public ResponseEntity<User> createUser(@RequestBody User user) {
-        // Logic to create the user
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        User savedUser = userService.createUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
-
 
     @GetMapping("/{id}")
     public Optional<User> getUserById(@PathVariable String id) {

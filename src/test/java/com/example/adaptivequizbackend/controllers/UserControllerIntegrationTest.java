@@ -8,14 +8,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.*;
-
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
@@ -25,48 +22,33 @@ public class UserControllerIntegrationTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
-
     private ObjectMapper objectMapper;
 
     private User testUser;
 
     @BeforeEach
     public void setup() {
-        testUser = new User();
-        testUser.setId("testId");
-        testUser.setUsername("test");
-        testUser.setPassword("passwordTest");
-        testUser.setEmail("testemail@test.com");
-        testUser.setEasyScore(0);
-        testUser.setMediumScore(0);
-        testUser.setHardScore(0);
-
-        when(userRepository.findById("testId")).thenReturn(Optional.of(testUser));
-        when(userRepository.findUserByUsername("test")).thenReturn(Optional.of(testUser));
-        when(userRepository.save(testUser)).thenReturn(testUser);
-        when(userRepository.findAll()).thenReturn(Collections.singletonList(testUser));
+        userRepository.deleteAll();
+        User testUser = new User("testId", "test", "passwordTest", "testemail@test.com", 0, 0, 0);
+        userRepository.save(testUser);
     }
 
-    // Passed
     @Test
     public void createUser() throws Exception {
-        String user = "{\"username\":\"newuser\",\"password\":\"newpassword\",\"email\":\"newuser@newcastle.com\"}";
+        String userJson = "{\"username\":\"newuser\",\"password\":\"newpassword\",\"email\":\"newuser@newcastle.com\"}";
 
         mockMvc.perform(post("/api/users/createUser")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(user))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.username").value("newuser"));
+                        .content(userJson))
+                .andExpect(status().isCreated())  // Check for status CREATED (201)
+                .andExpect(jsonPath("$.username").value("newuser"))
+                .andExpect(jsonPath("$.email").value("newuser@newcastle.com"));
     }
 
-
-
-
-    // Passed
     @Test
     public void getUserById() throws Exception {
         mockMvc.perform(get("/api/users/testId"))
@@ -74,7 +56,6 @@ public class UserControllerIntegrationTest {
                 .andExpect(jsonPath("$.username").value("test"));
     }
 
-    // Passed
     @Test
     public void getUserByUsername() throws Exception {
         mockMvc.perform(get("/api/users/username/test"))
@@ -82,7 +63,6 @@ public class UserControllerIntegrationTest {
                 .andExpect(jsonPath("$.email").value("testemail@test.com"));
     }
 
-    // Passed
     @Test
     public void loginCheck() throws Exception {
         User loginRequest = new User();
@@ -96,11 +76,11 @@ public class UserControllerIntegrationTest {
                 .andExpect(content().string("true"));
     }
 
-    // Passed
     @Test
     public void getAllUsers() throws Exception {
         mockMvc.perform(get("/api/users/getAllUsers"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$").isArray());
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[0].username").value("test"));
     }
 }

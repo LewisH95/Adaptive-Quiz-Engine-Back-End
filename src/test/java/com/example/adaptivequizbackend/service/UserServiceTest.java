@@ -23,6 +23,9 @@ public class UserServiceTest {
     private final String testUsername = "test";
     private final String testPassword = "password";
 
+    // TESTS MUST BE RAN IN ISOLATION
+
+    // Passed
     @BeforeEach
     public void createUser() {
         userRepository.findUserByUsername(testUsername).ifPresent(userRepository::delete);
@@ -39,7 +42,7 @@ public class UserServiceTest {
 
     // Passed
     @Test
-    public void testUpdateProgressEasy() {
+    public void updateProgressEasy() {
         userService.updateProgress(testUsername, "easy", true);
 
 
@@ -53,7 +56,7 @@ public class UserServiceTest {
 
     // Passed
     @Test
-    public void testUpdateProgressMedium() {
+    public void updateProgressMedium() {
 
         userService.updateProgress(testUsername, "medium", true);
 
@@ -68,7 +71,7 @@ public class UserServiceTest {
 
     // Passed
     @Test
-    public void testUpdateProgressHard() {
+    public void updateProgressHard() {
         userService.updateProgress(testUsername, "hard", true);
 
         Optional<User> optionalUser = userRepository.findUserByUsername(testUsername);
@@ -80,7 +83,7 @@ public class UserServiceTest {
 
     // Passed (Fails if tests above are run at same time. As it will change the scores).
     @Test
-    public void testGetScores() {
+    public void getScores() {
         Optional<User> optionalUser = userRepository.findUserByUsername(testUsername);
         assertTrue(optionalUser.isPresent(), "User should be present");
         User user = optionalUser.get();
