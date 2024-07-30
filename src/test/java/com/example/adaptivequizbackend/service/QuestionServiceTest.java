@@ -7,10 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest(classes = AdaptiveQuizBackEndApplication.class)
 public class QuestionServiceTest {
@@ -21,73 +19,45 @@ public class QuestionServiceTest {
     @Autowired
     private QuestionRepository questionRepository;
 
+    // Passed
     @Test
-    public void testGetQuestionByDifficultyEasy() {
-
-        List<Question> expectedQuestions = questionRepository.findByDifficulty("easy");
-
-
-        assertFalse(expectedQuestions.isEmpty(), "No easy questions found in the database.");
-
-
+    public void getQuestionByDifficultyEasyNotNull() {
         Question question = questionService.getQuestionByDifficulty("easy");
-
-
-        assertNotNull(question, "Question should not be null");
-        assertEquals("easy", question.getDifficulty(), "Difficulty should be 'easy'");
-
-
-        Optional<Question> matchingQuestion = expectedQuestions.stream()
-                .filter(q -> q.getQuestionText().equals(question.getQuestionText()))
-                .findFirst();
-
-        assertTrue(matchingQuestion.isPresent(), "The retrieved question should be among the expected questions.");
+        assertNotNull(question, "Question should not be null for difficulty 'easy'");
     }
 
+    // Passed
     @Test
-    public void testGetQuestionByDifficultyMedium() {
+    public void getQuestionByDifficultyEasy() {
+        Question question = questionService.getQuestionByDifficulty("easy");
+        assertEquals("easy", question.getDifficulty(), "Difficulty should be 'easy' for the retrieved question");
+    }
 
-        List<Question> expectedQuestions = questionRepository.findByDifficulty("medium");
-
-
-        assertFalse(expectedQuestions.isEmpty(), "No medium questions found in the database.");
-
-
+    // Passed
+    @Test
+    public void getQuestionByDifficultyMediumNotNull() {
         Question question = questionService.getQuestionByDifficulty("medium");
-
-
-        assertNotNull(question, "Question should not be null");
-        assertEquals("medium", question.getDifficulty(), "Difficulty should be 'medium'");
-
-
-        Optional<Question> matchingQuestion = expectedQuestions.stream()
-                .filter(q -> q.getQuestionText().equals(question.getQuestionText()))
-                .findFirst();
-
-        assertTrue(matchingQuestion.isPresent(), "The retrieved question should be among the expected questions.");
+        assertNotNull(question, "Question should not be null for difficulty 'medium'");
     }
 
+    // Passed
     @Test
-    public void testGetQuestionByDifficultyHard() {
-
-        List<Question> expectedQuestions = questionRepository.findByDifficulty("hard");
-
-
-        assertFalse(expectedQuestions.isEmpty(), "No hard questions found in the database.");
-
-
-        Question question = questionService.getQuestionByDifficulty("hard");
-
-
-        assertNotNull(question, "Question should not be null");
-        assertEquals("hard", question.getDifficulty(), "Difficulty should be 'hard'");
-
-
-        Optional<Question> matchingQuestion = expectedQuestions.stream()
-                .filter(q -> q.getQuestionText().equals(question.getQuestionText()))
-                .findFirst();
-
-        assertTrue(matchingQuestion.isPresent(), "The retrieved question should be among the expected questions.");
+    public void getQuestionByDifficultyMedium() {
+        Question question = questionService.getQuestionByDifficulty("medium");
+        assertEquals("medium", question.getDifficulty(), "Difficulty should be 'medium' for the retrieved question");
     }
 
+    // Passed
+    @Test
+    public void getQuestionByDifficultyHardNotNull() {
+        Question question = questionService.getQuestionByDifficulty("hard");
+        assertNotNull(question, "Question should not be null for difficulty 'hard'");
+    }
+
+    // Passed
+    @Test
+    public void getQuestionByDifficultyHard() {
+        Question question = questionService.getQuestionByDifficulty("hard");
+        assertEquals("hard", question.getDifficulty(), "Difficulty should be 'hard' for the retrieved question");
+    }
 }

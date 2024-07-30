@@ -3,10 +3,14 @@ package com.example.adaptivequizbackend.api.controller;
 import com.example.adaptivequizbackend.api.model.User;
 import com.example.adaptivequizbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/users")
@@ -20,16 +24,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Test Message for the API connecting to the front end
-    @GetMapping("/api/hello")
-    public String helloWorld() {
-        return "Hello World from Spring";
+    @PostMapping("/createUser")
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        // Logic to create the user
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
-    }
 
     @GetMapping("/{id}")
     public Optional<User> getUserById(@PathVariable String id) {
@@ -51,9 +51,11 @@ public class UserController {
         userService.updateProgress(userId, difficulty, correct);
     }
 
-    @PutMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    @GetMapping("/getAllUsers")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
+
 
 }

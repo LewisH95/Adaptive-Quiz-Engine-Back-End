@@ -28,8 +28,8 @@ public class QuestionController {
         this.userService = userService;
     }
 
-    @GetMapping("/questionTest")
-    public Question getQuestionTest(@RequestParam(value = "difficulty", required = false, defaultValue = "Easy") String difficulty) {
+    @GetMapping("/getQuestion")
+    public Question getQuestion(@RequestParam(value = "difficulty", required = false, defaultValue = "Easy") String difficulty) {
         return questionService.getQuestionByDifficulty(difficulty);
     }
 

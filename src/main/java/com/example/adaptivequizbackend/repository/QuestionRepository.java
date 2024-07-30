@@ -5,4 +5,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.*;
 public interface QuestionRepository extends MongoRepository<Question, String>{
     List<Question> findByDifficulty(String difficulty);
+
+    Question findByQuestionId(String questionId);
+
+
 }
