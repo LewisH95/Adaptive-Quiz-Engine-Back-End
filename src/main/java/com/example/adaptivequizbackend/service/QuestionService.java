@@ -1,11 +1,13 @@
 package com.example.adaptivequizbackend.service;
 
 import com.example.adaptivequizbackend.api.model.Question;
-import org.springframework.stereotype.Service;
 import com.example.adaptivequizbackend.repository.QuestionRepository;
-import com.example.adaptivequizbackend.service.UserService;
+import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class QuestionService {
@@ -39,6 +41,7 @@ public class QuestionService {
         Optional<Question> question = questionRepository.findById(id);
         return question.orElse(null);
     }
+
     public String getFeedback(String questionId, String userAnswer) {
         Question question = getQuestionById(questionId);
         if (question != null) {

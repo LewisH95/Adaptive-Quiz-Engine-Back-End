@@ -44,7 +44,7 @@ public class UserControllerIntegrationTest {
         mockMvc.perform(post("/api/users/createUser")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(userJson))
-                .andExpect(status().isCreated())  // Check for status CREATED (201)
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.username").value("newuser"))
                 .andExpect(jsonPath("$.email").value("newuser@newcastle.com"));
     }
