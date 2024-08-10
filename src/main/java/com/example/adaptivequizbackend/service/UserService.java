@@ -5,8 +5,12 @@ import com.example.adaptivequizbackend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-
-
+/**
+ * UserService handles the business logic related to user management within the adaptive quiz system. This service
+ * manages user creation, retrieval, authentication, and progress tracking. It interacts with the UserRepository
+ * for data on users from the users collection in the MongoDb Atlas database and performs operations such as updating
+ * user scores and validating login credentials.
+ */
 @Service
 public class UserService {
 

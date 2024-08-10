@@ -3,6 +3,12 @@ package com.example.adaptivequizbackend.api.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.*;
+/**
+ * The User class represents a user in the adaptive quiz system, stored in the "users"
+ * collection in MongoDB Atlas. The class manages user information including
+ * username, password, email, and quiz scores across different difficulty levels.
+ * This model includes methods for retrieving and updating user details and scores.
+ */
 
 @Document(collection = "users")
 public class User {

@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
-
+/**
+ * UserController handles API requests related to user management within the adaptive quiz system. This controller
+ * manages user creation, retrieval by ID or username, login authentication, progress updates, and listing all users.
+ * It serves as an intermediary between the front-end and the UserService, which processes user-related logic.
+ */
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

@@ -8,7 +8,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
+/**
+ * QuestionService handles the business logic related to quiz questions within the adaptive quiz system. This service
+ * manages operations such as retrieving questions based on difficulty, providing feedback on answers, and updating
+ * user progress. It interacts with the QuestionRepository to access the question collection in the MongoDB Atlas database
+ * and the UserService for updating user performance metrics.
+ */
 @Service
 public class QuestionService {
 

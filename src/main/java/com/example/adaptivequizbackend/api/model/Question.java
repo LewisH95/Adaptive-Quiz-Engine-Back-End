@@ -4,7 +4,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-
+/**
+ * The Question class represents a quiz question stored in a MongoDB Atlas collection.
+ * This class is mapped to the "questions" collection in MongoDB Atlas and is used to
+ * model different types of quiz questions, such as multiple choice, true/false,
+ * and short answer questions.
+ */
 @Document(collection = "questions")
 public class Question {
     @Id

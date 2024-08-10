@@ -8,8 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
-
-
+/**
+ * QuestionController handles API requests related to the adaptive quiz system. This controller
+ * manages quiz question retrieval, difficulty adjustment using  BayesAlgorithm service
+ * , quiz progress updates, and feedback delivery. It acts as a bridge
+ * between the front-end and the services that process quiz-related logic.
+ */
 @RestController
 @RequestMapping("/api")
 public class QuestionController {
