@@ -10,7 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+/**
+ * Unit tests for the UserService.
+ * This class verifies the functionality of the UserService, ensuring that
+ * user-related operations like updating progress, retrieving scores, and
+ * authenticating logins work as expected. The tests must be run in isolation
+ * to avoid interference between test cases.
+ */
 @SpringBootTest
 public class UserServiceTest {
 

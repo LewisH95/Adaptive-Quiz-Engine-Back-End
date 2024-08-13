@@ -9,7 +9,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+/**
+ * Unit tests for the QuestionService.
+ * This class verifies the functionality of the QuestionService, ensuring that
+ * questions are correctly retrieved based on their difficulty level.
+ * The tests check for both non-null responses and correct difficulty values
+ * in the retrieved questions.
+ */
 @SpringBootTest(classes = AdaptiveQuizBackEndApplication.class)
 public class QuestionServiceTest {
 

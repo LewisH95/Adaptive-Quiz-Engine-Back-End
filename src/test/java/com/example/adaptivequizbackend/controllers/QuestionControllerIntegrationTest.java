@@ -21,7 +21,12 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+/**
+ * Integration test for the QuestionController.
+ * This class verifies the end-to-end functionality of the QuestionController,
+ * ensuring that requests to the REST API endpoints behave as expected.
+ * MockMvc is used to simulate HTTP requests and verify responses.
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class QuestionControllerIntegrationTest {

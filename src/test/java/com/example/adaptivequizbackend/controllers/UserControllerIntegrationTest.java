@@ -14,7 +14,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+/**
+ * Integration tests for the UserController.
+ * This class verifies the end-to-end functionality of the UserController,
+ * ensuring that requests to the REST API endpoints behave as expected.
+ * MockMvc is used to simulate HTTP requests and verify responses.
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerIntegrationTest {
